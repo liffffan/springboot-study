@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 填对应的操作数据库的文件 -->
+<mapper namespace="com.imooc.mall.dao.CategoryMapper">
+    <sql id="Base_Column_List" >
+        id, parent_id, name, status, sort_order, create_time, update_time
+    </sql>
+
+    <!--  id 填方法名   resultType 填返回值-->
+    <!--  Invalid bound statement (not found): com.imooc.mall.dao.CategoryMapper.queryById  -->
+    <!--  这个报错是找不到 queryById 方法，因为 mapper 这个目录的路径不是约定的，需要在配置文件里配置  -->
+    <select id="queryById" resultType="com.imooc.mall.pojo.Category">
+        select 
+        <include refid="Base_Column_List"/>
+        from mall_category
+        where id = #{id}
+    </select>
+</mapper>

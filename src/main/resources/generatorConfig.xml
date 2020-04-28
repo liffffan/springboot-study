@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--  配置数据库的驱动   -->
+    <!--  windows路径： D:\downloads\xxx.jar  -->
+    <classPathEntry location="/Users/lifeifan/Downloads/mysql-connector-java-5.1.6.jar" />
+
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!--  防止 mapper.xml 重复追加      -->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
+        <commentGenerator>
+            <!--  suppressAllComments是去掉所有的注解； -->
+            <property name="suppressAllComments" value="true"></property>
+        </commentGenerator>
+
+        <!--  数据库配置  -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/springboot-study?character=utf-8"
+                        userId="root"
+                        password="12345678">
+        </jdbcConnection>
+
+
+        <!--  强制转换类型，具体参考资料      -->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--   targetPackage 存放 pojo 的路径 ，targetProject 生成文件存放的路径    -->
+        <javaModelGenerator targetPackage="com.imooc.mall.pojo" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <!--  设置是否在 getter 方法总，对 String 类型的字段调用 trim() 方法，去掉空格          -->
+            <!--  <property name="trimStrings" value="true" />-->
+        </javaModelGenerator>
+
+        <!--        -->
+        <sqlMapGenerator targetPackage="mappers"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.imooc.mall.dao"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="mall_order" domainObjectName="Order" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableSelectByExample="false"/>
+        <table tableName="mall_order_item" domainObjectName="OrderItem" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" enableSelectByExample="false"/>
+
+    </context>
+</generatorConfiguration>
